@@ -1,0 +1,44 @@
+.header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 20;
+  background: rgba(9, 12, 20, 0.7);
+  backdrop-filter: blur(8px);
+  padding: 20px 0;
+
+  .container {
+    width: 85%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo span {
+    font-size: 22px;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .nav a {
+    margin: 0 18px;
+    color: #cbd0dd;
+    text-decoration: none;
+    font-size: 15px;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  .btn-primary {
+    padding: 10px 24px;
+    background: #4c7eff;
+    border-radius: 8px;
+    border: none;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+  }
+}
