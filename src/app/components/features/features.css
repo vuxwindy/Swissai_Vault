@@ -1,50 +1,9 @@
-.features {
-  padding: 120px 0;
-  background: #0d111b;
+@keyframes marqueeLoop {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
 
-  .container {
-    width: 85%;
-    margin: auto;
-    text-align: center;
-  }
-
-  h2 {
-    font-size: 36px;
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 60px;
-  }
-
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 35px;
-
-    @media (max-width: 900px) {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .card {
-    padding: 40px 30px;
-    background: #121722;
-    border-radius: 14px;
-    transition: 0.3s;
-    text-align: left;
-
-    &:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 0 20px rgba(80, 120, 255, 0.2);
-    }
-
-    h3 {
-      color: #fff;
-      margin-top: 20px;
-    }
-
-    p {
-      color: #b2b9c8;
-      margin-top: 10px;
-    }
-  }
+.marquee {
+  animation: marqueeLoop 25s linear infinite;
+  width: max-content;
 }

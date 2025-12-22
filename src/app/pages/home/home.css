@@ -1,0 +1,96 @@
+.hero {
+  padding-top: 140px;
+  padding-bottom: 100px;
+  background: linear-gradient(180deg, #0a0d15, #101523);
+
+  .container {
+    width: 85%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    @media (max-width: 990px) {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+
+  .content {
+    max-width: 550px;
+
+    h1 {
+      font-size: 48px;
+      line-height: 1.2;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    p {
+      margin-top: 20px;
+      color: #aab3c5;
+      font-size: 18px;
+    }
+
+    .btn-primary {
+      margin-top: 30px;
+      padding: 12px 32px;
+      background: #4c7eff;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+    }
+  }
+
+  .visual img {
+    width: 450px;
+    filter: drop-shadow(0 0 25px rgba(80, 120, 255, 0.4));
+  }
+}
+
+.header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 20;
+  background: rgba(9, 12, 20, 0.7);
+  backdrop-filter: blur(8px);
+  padding: 20px 0;
+
+  .container {
+    width: 85%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo span {
+    font-size: 22px;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .nav a {
+    margin: 0 18px;
+    color: #cbd0dd;
+    text-decoration: none;
+    font-size: 15px;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  .btn-primary {
+    padding: 10px 24px;
+    background: #4c7eff;
+    border-radius: 8px;
+    border: none;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+  }
+}
+
