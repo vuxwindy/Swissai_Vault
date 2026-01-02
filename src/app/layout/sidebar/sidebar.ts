@@ -14,13 +14,13 @@ export class Sidebar {
     mobileOpen = false;
 
     menu = [
-    { label: 'Dashboard', icon: '📊', route: '/app/dashboard' },
-    { label: 'Vaults', icon: '👛', route: '/app/vaults' },
-    { label: 'Proposals', icon: '💎', route: '/app/proposals' },
-    { label: 'Loan', icon: '💳', route: '/app/loan' },
-    { label: 'Reports', icon: '💬', route: '/app/reports' },
-    { label: 'Settings', icon: '⚙️', route: '/app/settings' },
-    { label: 'Help', icon: '💬', route: '/app/help' }
+    { label: 'Dashboard', icon: '📊', route: '/dashboard' },
+    { label: 'Vaults', icon: '👛', route: '/vaults' },
+    { label: 'Proposals', icon: '💎', route: '/proposals' },
+    { label: 'Loan', icon: '💳', route: '/loan' },
+    { label: 'Reports', icon: '💬', route: '/reports' },
+    { label: 'Settings', icon: '⚙️', route: '/settings' },
+    { label: 'Help', icon: '💬', route: '/help' }
   ];
 
    toggleCollapse() {
