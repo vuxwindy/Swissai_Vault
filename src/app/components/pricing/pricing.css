@@ -1,0 +1,9 @@
+@keyframes marqueeLoop {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee {
+  animation: marqueeLoop 25s linear infinite;
+  width: max-content;
+}

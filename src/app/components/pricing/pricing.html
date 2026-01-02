@@ -1,1 +1,54 @@
-<p>pricing works!</p>
+
+<!-- price -->
+<div class="bg-black w-full overflow-hidden  py-3">
+  <div class="marquee flex items-center gap-8">
+
+    <!-- Lần 1 -->
+    <div class="flex items-center gap-8">
+      <ng-container *ngTemplateOutlet="coinList"></ng-container>
+    </div>
+
+    <!-- Lần 2 (Bản sao) -->
+    <div class="flex items-center gap-8">
+      <ng-container *ngTemplateOutlet="coinList"></ng-container>
+    </div>
+
+  </div>
+</div>
+
+<ng-template #coinList>
+  <div class="flex items-center gap-4 min-w-max">
+    <img src="https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png" class="w-6 h-6 rounded-full" />
+    <span class="text-white font-semibold">BTC</span>
+    <span class="text-white text-xl font-bold">$91,946.00</span>
+    <span class="text-green-400 text-sm font-semibold">▲ 3.1%</span>
+  </div>
+
+  <div class="flex items-center gap-4 min-w-max">
+    <img src="https://coin-images.coingecko.com/coins/images/279/large/ethereum.png" class="w-6 h-6 rounded-full" />
+    <span class="text-white font-semibold">ETH</span>
+    <span class="text-white text-xl font-bold">$3,157.33</span>
+    <span class="text-green-400 text-sm font-semibold">▲ 4.1%</span>
+  </div>
+
+  <div class="flex items-center gap-4 min-w-max">
+    <img src="https://coin-images.coingecko.com/coins/images/325/large/Tether.png" class="w-6 h-6 rounded-full" />
+    <span class="text-white font-semibold">USDT</span>
+    <span class="text-white text-xl font-bold">$1</span>
+    <span class="text-red-400 text-sm font-semibold">▼ 0.0%</span>
+  </div>
+
+   <div class="flex items-center gap-4 min-w-max">
+    <img src="https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png" class="w-6 h-6 rounded-full" />
+    <span class="text-white font-semibold">BNB</span>
+    <span class="text-white text-xl font-bold">$862.21</span>
+    <span class="text-green-400 text-sm font-semibold">▲ 2.1%</span>
+  </div>
+
+  <div class="flex items-center gap-4 min-w-max">
+    <img src="https://coin-images.coingecko.com/coins/images/325/large/Tether.png" class="w-6 h-6 rounded-full" />
+    <span class="text-white font-semibold">XRP</span>
+    <span class="text-white text-xl font-bold">$1.86</span>
+    <span class="text-red-400 text-sm font-semibold">▼ 0.92%</span>
+  </div>
+</ng-template>

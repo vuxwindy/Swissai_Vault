@@ -1,0 +1,69 @@
+<!-- OVERLAY (mobile) -->
+<div
+  *ngIf="mobileOpen"
+  class="fixed inset-0 bg-black/60 z-40 lg:hidden"
+  (click)="closeMobile()"
+></div>
+
+<!-- SIDEBAR -->
+<aside
+  class="fixed lg:static z-50 h-full bg-[#0b1220] border-r border-slate-800
+         transition-all duration-300 flex flex-col"
+  [class.w-64]="!collapsed"
+  [class.w-16]="collapsed"
+  [class.-translate-x-full]="!mobileOpen"
+  [class.translate-x-0]="mobileOpen"
+  class="lg:translate-x-0"
+>
+  <!-- LOGO -->
+  <div class="h-16 flex items-center justify-between px-4 border-b border-slate-800">
+    <div class="flex items-center gap-3 overflow-hidden">
+      <div class="w-9 h-9 rounded-full border border-cyan-400 flex items-center justify-center shrink-0">
+        <span class="text-cyan-400 font-bold">C</span>
+      </div>
+      <span
+        class="text-white font-semibold whitespace-nowrap transition-all"
+        [class.opacity-0]="collapsed"
+      >
+        AI Custody
+      </span>
+    </div>
+
+    <!-- Collapse button (desktop) -->
+    <button
+      class="hidden lg:block text-slate-400 hover:text-white"
+      (click)="toggleCollapse()"
+    >
+      ☰
+    </button>
+  </div>
+
+  <!-- MENU -->
+  <nav class="flex-1 px-2 py-4 space-y-1">
+    <a
+      *ngFor="let item of menu"
+      [routerLink]="item.route"
+      routerLinkActive="bg-[#121826] text-white"
+      class="flex items-center gap-3 px-3 py-3 rounded-lg text-slate-400
+             hover:bg-[#121826] hover:text-white transition"
+      (click)="closeMobile()"
+    >
+      <span class="text-lg w-6 text-center">{{ item.icon }}</span>
+      <span
+        class="text-sm font-medium whitespace-nowrap transition-all"
+        [class.opacity-0]="collapsed"
+      >
+        {{ item.label }}
+      </span>
+    </a>
+  </nav>
+
+  <!-- FOOTER -->
+  <div
+    class="px-4 py-3 text-xs text-slate-500 border-t border-slate-800
+           transition-all"
+    [class.opacity-0]="collapsed"
+  >
+    Internal System
+  </div>
+</aside>

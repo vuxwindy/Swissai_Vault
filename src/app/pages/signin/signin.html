@@ -1,0 +1,74 @@
+<div class="container">
+  <div class="box">
+    <div class="form">
+
+      @if (!isSignup) {
+
+      <!-- SIGN IN -->
+      <form [formGroup]="signInForm" (ngSubmit)="submitSignIn()">
+
+        <h2>Sign in</h2>
+
+
+        <div class="inputBox">
+          <input type="email" formControlName="email" required />
+          <span>Email</span>
+          <i></i>
+        </div>
+
+        <div class="inputBox">
+          <input type="password" formControlName="password" required />
+          <span>Password</span>
+          <i></i>
+        </div>
+
+        <div class="links">
+          <a href="#">Forget Password</a>
+          <a (click)="switchMode()">Signup</a>
+        </div>
+        <a href="app.home">
+          <input type="submit" value="Login" [disabled]="signInForm.invalid" />
+        </a>
+      </form>
+      }
+
+      @else {
+
+      <!-- SIGN UP -->
+      <form [formGroup]="signUpForm" (ngSubmit)="submitSignUp()">
+
+        <h2>Sign up</h2>
+
+        <div class="inputBox">
+          <input type="email" formControlName="email" required />
+          <span>Email</span>
+          <i></i>
+        </div>
+
+        <div class="inputBox">
+          <input type="password" formControlName="password" required />
+          <span>Password</span>
+          <i></i>
+        </div>
+
+        <div class="inputBox">
+          <input type="password" formControlName="confirmPassword" required />
+          <span>Confirm Password</span>
+          <i></i>
+        </div>
+
+        <div class="links">
+          <a (click)="switchMode()">Already have an account?</a>
+        </div>
+
+        <button type="submit" [disabled]="signUpForm.invalid">
+          Register
+        </button>
+
+
+      </form>
+      }
+
+    </div>
+  </div>
+</div>

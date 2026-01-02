@@ -1,0 +1,121 @@
+<section
+  class="h-16 bg-[#0b1220] border-b border-slate-800
+         flex items-center px-4 lg:px-6 gap-3"
+>
+
+  <!-- MOBILE: SIDEBAR TOGGLE -->
+  <button
+    class="lg:hidden text-slate-300 hover:text-white"
+    (click)="toggleSidebar()"
+  >
+    ☰
+  </button>
+
+  <!-- LOGO -->
+  <div
+    class="w-9 h-9 rounded-full border border-cyan-400
+           flex items-center justify-center shrink-0"
+  >
+    <span class="text-cyan-400 font-bold text-lg">C</span>
+  </div>
+
+  <!-- TITLE -->
+  <div class="flex-1 px-2 lg:px-3 overflow-hidden">
+    <h1
+      class="text-white text-base lg:text-lg font-semibold truncate"
+    >
+      AI Multisig Custody
+    </h1>
+  </div>
+
+  <!-- RIGHT ACTIONS (DESKTOP) -->
+  <div class="hidden lg:flex items-center gap-4">
+
+    <!-- CONNECT WALLET -->
+    <button
+      *ngIf="!walletConnected"
+      (click)="connectWallet()"
+      class="px-4 py-2 rounded-lg bg-cyan-500 hover:bg-cyan-400
+             text-black font-semibold text-sm transition"
+    >
+      Connect Wallet
+    </button>
+
+    <!-- WALLET CONNECTED -->
+    <div
+      *ngIf="walletConnected"
+      class="flex items-center gap-3 px-4 py-2 rounded-lg
+             bg-[#121826] border border-slate-700"
+    >
+      <span class="w-2 h-2 rounded-full bg-green-400"></span>
+      <span class="text-sm text-white font-medium truncate max-w-[120px]">
+        {{ walletAddress }}
+      </span>
+    </div>
+
+    <!-- LANGUAGE SWITCH -->
+    <button
+      (click)="toggleLanguage()"
+      class="flex items-center gap-2 px-3 py-2 rounded-lg
+             bg-[#121826] text-slate-300 hover:text-white
+             border border-slate-700 hover:border-cyan-400 transition text-sm"
+    >
+      <span
+        class="fi rounded-sm w-5 h-4"
+        [ngClass]="{
+          'fi-gb': currentLang === 'EN',
+          'fi-ch': currentLang === 'CH'
+        }"
+      ></span>
+      <span class="font-medium">{{ currentLang }}</span>
+    </button>
+
+  </div>
+
+  <!-- MOBILE: ACTION MENU -->
+  <div class="lg:hidden relative">
+
+    <button
+      class="text-slate-300 hover:text-white"
+      (click)="mobileMenuOpen = !mobileMenuOpen"
+    >
+      ⋮
+    </button>
+
+    <!-- DROPDOWN -->
+    <div
+      *ngIf="mobileMenuOpen"
+      class="absolute right-0 mt-2 w-56 rounded-xl
+             bg-[#121826] border border-slate-700
+             shadow-lg p-2 z-50"
+    >
+
+      <!-- WALLET -->
+      <button
+        *ngIf="!walletConnected"
+        (click)="connectWallet(); mobileMenuOpen = false"
+        class="w-full px-3 py-2 rounded-lg text-left
+               hover:bg-[#1a2233] text-sm"
+      >
+        Connect Wallet
+      </button>
+
+      <div
+        *ngIf="walletConnected"
+        class="px-3 py-2 text-xs text-slate-400"
+      >
+        {{ walletAddress }}
+      </div>
+
+      <!-- LANGUAGE -->
+      <button
+        (click)="toggleLanguage(); mobileMenuOpen = false"
+        class="w-full px-3 py-2 rounded-lg text-left
+               hover:bg-[#1a2233] text-sm"
+      >
+        Language: {{ currentLang }}
+      </button>
+    </div>
+  </div>
+
+</section>
