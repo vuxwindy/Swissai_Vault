@@ -1,1 +1,196 @@
-<p>loan works!</p>
+<section class="min-h-screen flex items-start justify-center pt-24">
+  <div
+    class="w-full max-w-[760px]
+           bg-gradient-to-br from-[#0b0f1a] to-[#121826]
+           border border-white/10
+           rounded-2xl p-8
+           shadow-2xl"
+  >
+    <!-- Title -->
+    <h1 class="text-center text-2xl font-semibold mb-8">
+      Credit Line Application
+    </h1>
+
+    <form [formGroup]="form" class="space-y-5">
+      <!-- Full Name -->
+      <div>
+        <label class="block text-sm mb-1">
+          Full Name<span class="text-red-500">*</span>
+        </label>
+        <input
+          formControlName="fullName"
+          placeholder="Full Name"
+          class="form-input  w-full px-4 py-2.5 rounded-lg
+           bg-white/5
+           border border-white/20
+           text-sm
+           outline-none
+           focus:border-cyan-400
+           focus:ring-1 focus:ring-cyan-400
+           transition"
+        />
+      </div>
+
+      <!-- Email -->
+      <div>
+        <label class="block text-sm mb-1">
+          Email Address<span class="text-red-500">*</span>
+        </label>
+        <input
+          formControlName="email"
+          placeholder="user@example.com"
+          readonly
+          class="form-input opacity-70  w-full px-4 py-2.5 rounded-lg
+           bg-white/5
+           border border-white/20
+           text-sm
+           outline-none
+           focus:border-cyan-400
+           focus:ring-1 focus:ring-cyan-400
+           transition"
+        />
+      </div>
+
+      <!-- Country + Custody -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm mb-1">
+            Country / Region<span class="text-red-500">*</span>
+          </label>
+          <select formControlName="country" class="form-input  w-full px-4 py-2.5 rounded-lg
+           bg-white/5
+           border border-white/20
+           text-sm
+           outline-none
+           focus:border-cyan-400
+           focus:ring-1 focus:ring-cyan-400
+           transition">
+            <option value="" class=" bg-white/5">Select...</option>
+            <option value="US">United States</option>
+            <option value="EU">Europe</option>
+            <option value="SG">Singapore</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-sm mb-1">
+            Current Custody Value
+          </label>
+          <input
+            formControlName="custodyValue"
+            readonly
+            class="form-input opacity-70  w-full px-4 py-2.5 rounded-lg
+           bg-white/5
+           border border-white/20
+           text-sm
+           outline-none
+           focus:border-cyan-400
+           focus:ring-1 focus:ring-cyan-400
+           transition"
+          />
+        </div>
+      </div>
+
+      <!-- Requested Amount -->
+      <div>
+        <label class="block text-sm mb-1">
+          Requested Credit Amount (USDT)<span class="text-red-500">*</span>
+        </label>
+        <input
+          type="number"
+          formControlName="amount"
+          placeholder="Amount"
+          class="form-input  w-full px-4 py-2.5 rounded-lg
+           bg-white/5
+           border border-white/20
+           text-sm
+           outline-none
+           focus:border-cyan-400
+           focus:ring-1 focus:ring-cyan-400
+           transition"
+        />
+      </div>
+
+      <!-- Loan Term -->
+      <div>
+        <label class="block text-sm mb-1">
+          Preferred Loan Term<span class="text-red-500">*</span>
+        </label>
+        <select formControlName="term" class="form-input  w-full px-4 py-2.5 rounded-lg
+           bg-white/5
+           border border-white/20
+           text-sm
+           outline-none
+           focus:border-cyan-400
+           focus:ring-1 focus:ring-cyan-400
+           transition">
+          <option value="">Select...</option>
+          <option value="3">3 Months</option>
+          <option value="6">6 Months</option>
+          <option value="12">12 Months</option>
+        </select>
+      </div>
+
+      <!-- Purpose -->
+      <div>
+        <label class="block text-sm mb-1">Purpose of Credit</label>
+        <input
+          formControlName="purpose"
+          placeholder="Briefly describe how you plan to use the credit (optional)"
+          class="form-input  w-full px-4 py-2.5 rounded-lg
+           bg-white/5
+           border border-white/20
+           text-sm
+           outline-none
+           focus:border-cyan-400
+           focus:ring-1 focus:ring-cyan-400
+           transition"
+        />
+      </div>
+
+      <!-- Risk -->
+      <div>
+        <label class="block text-sm mb-1">Risk Profile</label>
+        <select formControlName="risk" class="form-input  w-full px-4 py-2.5 rounded-lg
+           bg-white/5
+           border border-white/20
+           text-sm
+           outline-none
+           focus:border-cyan-400
+           focus:ring-1 focus:ring-cyan-400
+           transition">
+          <option value="">Select...</option>
+          <option value="low">Low Risk</option>
+          <option value="medium">Medium Risk</option>
+          <option value="high">High Risk</option>
+        </select>
+      </div>
+
+      <!-- Consent -->
+      <label class="flex items-start gap-2 text-sm text-gray-300">
+        <input
+          type="checkbox"
+          formControlName="consent"
+          class="mt-1"
+        />
+        I confirm the information provided is accurate and agree to a credit
+        review.
+      </label>
+
+      <!-- Submit -->
+      <button
+        type="button"
+        (click)="submit()"
+        [disabled]="form.invalid || loading"
+        class="w-full mt-6 py-3 rounded-xl
+               border-2 border-orange-500
+               text-orange-500 font-semibold
+               hover:bg-orange-500 hover:text-black
+               transition
+               disabled:opacity-50"
+      >
+        {{ loading ? 'Submitting...' : 'Submit Application' }}
+      </button>
+    </form>
+  </div>
+</section>

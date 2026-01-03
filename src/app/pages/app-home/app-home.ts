@@ -12,8 +12,12 @@ import { Sidebar } from '../../layout/sidebar/sidebar';
 })
 export class AppHome {
   visible = true;
-
+ collapsed = false;
+ 
   close() {
     this.visible = false;
+  }
+   toggleCollapse() {
+    this.collapsed = !this.collapsed;
   }
 }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
+
 @Component({
   selector: 'app-sidebar',
   standalone: true,
@@ -14,13 +15,14 @@ export class Sidebar {
     mobileOpen = false;
 
     menu = [
-    { label: 'Dashboard', icon: '📊', route: '/dashboard' },
-    { label: 'Vaults', icon: '👛', route: '/vaults' },
-    { label: 'Proposals', icon: '💎', route: '/proposals' },
-    { label: 'Loan', icon: '💳', route: '/loan' },
-    { label: 'Reports', icon: '💬', route: '/reports' },
-    { label: 'Settings', icon: '⚙️', route: '/settings' },
-    { label: 'Help', icon: '💬', route: '/help' }
+    { label: 'Dashboard', icon: '📊', route: '/app/dashboard' },
+    { label: 'Deposit/Withdraw', icon: '💎', route: '/app/proposals' },
+    { label: 'Credit/Loan', icon: '💳', route: '/app/loan' },
+    { label: 'Trust Pulse', icon: '', route: '/app/trustpulse' },
+    { label: 'AI Strategy Monitor', icon: '💬', route: '/app/reports' },
+    { label: 'KYC', icon: '👛', route: '/app/vaults' },
+    { label: 'Settings', icon: '⚙️', route: '/app/settings' },
+    { label: 'Log Out', icon: '💬', route: '/app/help' }
   ];
 
    toggleCollapse() {

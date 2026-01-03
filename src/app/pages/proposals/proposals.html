@@ -1,1 +1,244 @@
-<p>proposals works!</p>
+ 
+<div class="mb-6">
+  <h2 class="text-2xl font-semibold text-white">
+    Deposit / Withdraw
+  </h2>
+  <p class="text-sm text-slate-400">
+    Manage your funds securely via multisig vault
+  </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+
+  <div class="bg-slate-900/60 border border-white/10 rounded-xl p-5">
+    <p class="text-sm text-slate-400">Vault Balance</p>
+    <p class="text-2xl font-bold text-cyan-400 mt-1">
+      245,000 USDT
+    </p>
+  </div>
+
+  <div class="bg-slate-900/60 border border-white/10 rounded-xl p-5">
+    <p class="text-sm text-slate-400">Available</p>
+    <p class="text-2xl font-bold text-green-400 mt-1">
+      180,000 USDT
+    </p>
+  </div>
+
+  <div class="bg-slate-900/60 border border-white/10 rounded-xl p-5">
+    <p class="text-sm text-slate-400">Pending</p>
+    <p class="text-2xl font-bold text-yellow-400 mt-1">
+      65,000 USDT
+    </p>
+  </div>
+
+</div>
+<div class="flex gap-2 mb-6">
+  <button
+    class="px-4 py-2 rounded-lg text-sm font-medium"
+    [class.bg-cyan-500]="activeTab === 'deposit'"
+    [class.text-black]="activeTab === 'deposit'"
+    [class.bg-slate-800]="activeTab !== 'deposit'"
+    (click)="activeTab = 'deposit'"
+  >
+    Deposit
+  </button>
+
+  <button
+    class="px-4 py-2 rounded-lg text-sm font-medium"
+    [class.bg-cyan-500]="activeTab === 'withdraw'"
+    [class.text-black]="activeTab === 'withdraw'"
+    [class.bg-slate-800]="activeTab !== 'withdraw'"
+    (click)="activeTab = 'withdraw'"
+  >
+    Withdraw
+  </button>
+</div>
+<div *ngIf="activeTab === 'deposit'"
+     class="bg-slate-900/60 border border-white/10 rounded-xl p-6 space-y-5">
+
+  <!-- ASSET -->
+  <div>
+    <label class="text-sm text-slate-400">Amount</label>
+    <input   type="number"
+    min="1"  placeholder="5,000  USDT" class="w-full mt-1 px-4 py-2 rounded-lg   border border-white/10">
+  </div>
+  <!-- NETWORK -->
+<div>
+  <label class="text-sm text-slate-400">Network</label>
+  <select
+    [(ngModel)]="selectedNetwork"
+    class="w-full mt-1 px-4 py-2 rounded-lg bg-slate-800 border border-white/10
+           focus:outline-none focus:ring-2 focus:ring-cyan-500"
+  >
+    <option *ngFor="let n of (networkAddresses | keyvalue)" [value]="n.key">
+      {{ n.key }}
+    </option>
+  </select>
+</div>
+
+<!-- ADDRESS -->
+<div>
+  <label class="text-sm text-slate-400">Deposit Address</label>
+  <div class="flex items-center gap-2 mt-1">
+    <input
+      readonly
+      [value]="depositAddress"
+      class="flex-1 px-4 py-2 rounded-lg bg-slate-800 border border-white/10"
+    />
+    <button
+      (click)="copyAddress()"
+      class="px-3 py-2 rounded-lg bg-slate-700 hover:bg-slate-600"
+    >
+      Copy
+    </button>
+  </div>
+</div>
+
+  <!-- WARNING -->
+
+  <div
+  class="text-xs rounded-lg p-3 mt-3"
+  [ngClass]="{
+    'bg-yellow-400/10 border border-yellow-400/20 text-yellow-400': selectedNetwork !== 'BTC',
+    'bg-red-500/10 border border-red-500/20 text-red-400': selectedNetwork === 'BTC'
+  }"
+>
+  <ng-container *ngIf="selectedNetwork !== 'BTC'; else btcWarning">
+    Only send USDT via {{ selectedNetwork }} network.
+  </ng-container>
+
+  <ng-template #btcWarning>
+    BTC network only supports BTC. Sending USDT will result in loss.
+  </ng-template>
+</div>
+
+    <!-- SUBMIT -->
+<button
+    class="w-full mt-4 px-4 py-3 rounded-lg
+           bg-cyan-500 hover:bg-cyan-400
+           text-black font-semibold transition"
+  >
+    Submit Deposit 
+  </button>
+</div>
+
+<div *ngIf="activeTab === 'withdraw'"
+     class="bg-slate-900/60 border border-white/10 rounded-xl p-6 space-y-5">
+
+  <!-- AMOUNT -->
+  <div>
+    <label class="text-sm text-slate-400">Amount</label>
+    <input
+      type="number"
+      placeholder="0.00"
+      class="w-full mt-1 px-4 py-2 rounded-lg bg-slate-800 border border-white/10"
+    />
+  </div>
+
+  <!-- DESTINATION -->
+  <div>
+    <label class="text-sm text-slate-400">Destination Address</label>
+    <input
+      placeholder="Enter wallet address"
+      class="w-full mt-1 px-4 py-2 rounded-lg bg-slate-800 border border-white/10"
+    />
+  </div>
+
+  <!-- FEE -->
+  <div class="flex justify-between text-sm text-slate-400">
+    <span>Network Fee</span>
+    <span>~1.5 USDT</span>
+  </div>
+
+  <!-- SUBMIT -->
+  <button
+    class="w-full mt-4 px-4 py-3 rounded-lg
+           bg-cyan-500 hover:bg-cyan-400
+           text-black font-semibold transition"
+  >
+    Submit Withdrawal (Multisig)
+  </button>
+
+  <!-- NOTE -->
+  <p class="text-xs text-slate-500 text-center">
+    Withdrawal requires multisig approval and AI risk validation.
+  </p>
+
+</div>
+<!-- Transactions -->
+<div class="mt-8 bg-slate-900/60 border border-white/10 rounded-xl">
+  <div class="p-6 border-b border-white/10">
+    <h3 class="text-lg font-semibold text-white">
+      Recent Transactions
+    </h3>
+  </div>
+
+  <div class="overflow-x-auto">
+    <table class="w-full text-sm">
+      <thead class="bg-slate-900/80 text-slate-400">
+        <tr>
+          <th class="px-4 py-3 text-left">Value (USDT)</th>
+          <th class="px-4 py-3 text-left">Protocol</th>
+          <th class="px-4 py-3 text-left">Wallet</th>
+          <th class="px-4 py-3 text-left">Type</th>
+          <th class="px-4 py-3 text-left">Time (UTC+0)</th>
+          <th class="px-4 py-3 text-left">Status</th>
+          <th class="px-4 py-3 text-right">Actions</th>
+        </tr>
+      </thead>
+
+      <tbody class="divide-y divide-white/5">
+        <tr *ngFor="let tx of transactions">
+          <td class="px-4 py-3 text-white font-medium">
+            {{ tx.value | number }}
+          </td>
+
+          <td class="px-4 py-3 text-slate-300">
+            {{ tx.protocol }}
+          </td>
+
+          <td class="px-4 py-3 text-slate-400 font-mono">
+            {{ tx.wallet }}
+          </td>
+
+          <td class="px-4 py-3">
+            <span
+              class="px-2 py-1 rounded-md text-xs font-semibold"
+              [ngClass]="{
+                'bg-green-500/10 text-green-400': tx.type === 'Deposit',
+                'bg-red-500/10 text-red-400': tx.type === 'Withdraw'
+              }"
+            >
+              {{ tx.type }}
+            </span>
+          </td>
+
+          <td class="px-4 py-3 text-slate-400">
+            {{ tx.time }}
+          </td>
+
+          <td class="px-4 py-3">
+            <span
+              class="px-2 py-1 rounded-md text-xs font-semibold"
+              [ngClass]="{
+                'bg-green-500/10 text-green-400': tx.status === 'Completed',
+                'bg-yellow-500/10 text-yellow-400': tx.status === 'Pending',
+                'bg-red-500/10 text-red-400': tx.status === 'Failed'
+              }"
+            >
+              {{ tx.status }}
+            </span>
+          </td>
+
+          <td class="px-4 py-3 text-right">
+            <button
+              class="text-cyan-400 hover:text-cyan-300 text-xs"
+            >
+              View
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
