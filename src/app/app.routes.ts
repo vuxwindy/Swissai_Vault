@@ -15,7 +15,7 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', loadComponent: () => import('./pages/dashboard/dashboard').then((m) => m.Dashboard) },
-      { path: 'kyc', loadComponent: () => import('./pages/vaults/vaults').then((m) => m.Vaults) },
+      { path: 'vaults', loadComponent: () => import('./pages/vaults/vaults').then((m) => m.Vaults) },
       { path: 'proposals', loadComponent: () => import('./pages/proposals/proposals').then((m) => m.Proposals) },
       { path: 'trustpulse', loadComponent: () => import('./pages/trustpulse/trustpulse').then((m) => m.Trustpulse)},
       { path: 'loan', loadComponent: () => import('./pages/loan/loan').then((m) => m.Loan) },
