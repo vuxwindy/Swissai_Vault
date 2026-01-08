@@ -2,7 +2,6 @@
   <div class="auth-bg"></div>
 
   <div class="auth-container">
-    <!-- Left: brand/marketing -->
     <section class="left">
       <div class="brand">
         <span class="dot"></span>
@@ -10,33 +9,31 @@
       </div>
 
       <h1 class="title">
-        Sign in to your <span class="accent">Vault</span>
+        Create your <span class="accent">Vault</span> account
       </h1>
 
       <p class="desc">
-        Secure your digital assets with AI-driven multi-signature custody.
-        Built for Web3 & institutional-grade security.
+        Register to access AI multi-sig custody features and secure your assets.
       </p>
 
       <div class="badges">
-        <div class="badge">🔐 JWT Secure</div>
-        <div class="badge">⚡ Fast Access</div>
-        <div class="badge">🛡️ Trustless</div>
+        <div class="badge">✨ Quick setup</div>
+        <div class="badge">🔐 Secure by design</div>
+        <div class="badge">🧠 AI-powered</div>
       </div>
 
       <div class="hint">
         <span class="line"></span>
-        <span>New here?</span>
-        <a routerLink="/register" class="link">Create an account</a>
+        <span>Already have an account?</span>
+        <a routerLink="/signin" class="link">Sign in</a>
       </div>
     </section>
 
-    <!-- Right: form -->
     <section class="right">
       <div class="card">
         <div class="card-head">
-          <h2>Welcome back</h2>
-          <p>Enter your credentials to continue</p>
+          <h2>Create account</h2>
+          <p>It only takes a minute</p>
         </div>
 
         <form [formGroup]="form" (ngSubmit)="submit()" class="form">
@@ -48,7 +45,7 @@
                   <path d="M12 12a4.5 4.5 0 1 0-4.5-4.5A4.5 4.5 0 0 0 12 12Zm0 2.25c-4.3 0-7.8 2.2-7.8 4.9V21h15.6v-1.85c0-2.7-3.5-4.9-7.8-4.9Z"/>
                 </svg>
               </span>
-              <input formControlName="username" autocomplete="username" placeholder="Enter your username" />
+              <input formControlName="username" autocomplete="username" placeholder="Choose a username" />
             </div>
             <small class="err" *ngIf="form.controls.username.touched && form.controls.username.invalid">
               Username is required
@@ -63,30 +60,41 @@
                   <path d="M17 9h-1V7a4 4 0 0 0-8 0v2H7a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2Zm-7-2a2 2 0 0 1 4 0v2h-4V7Zm7 12H7v-8h10v8Z"/>
                 </svg>
               </span>
-              <input [type]="showPassword ? 'text' : 'password'"
-                     formControlName="password"
-                     autocomplete="current-password"
-                     placeholder="Enter your password" />
+              <input [type]="showPassword ? 'text' : 'password'" formControlName="password"
+                     autocomplete="new-password" placeholder="Create a password" />
               <button type="button" class="toggle" (click)="showPassword = !showPassword">
                 {{ showPassword ? 'Hide' : 'Show' }}
               </button>
             </div>
-            <small class="err" *ngIf="form.controls.password.touched && form.controls.password.invalid">
-              Password is required
-            </small>
+          </div>
+
+          <div class="field">
+            <label>Confirm password</label>
+            <div class="input">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M17 9h-1V7a4 4 0 0 0-8 0v2H7a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2Zm-7-2a2 2 0 0 1 4 0v2h-4V7Zm7 12H7v-8h10v8h10Z"/>
+                </svg>
+              </span>
+              <input [type]="showPassword ? 'text' : 'password'" formControlName="confirmPassword"
+                     autocomplete="new-password" placeholder="Repeat your password" />
+            </div>
+<!--            <small class="err" *ngIf="form.touched && form.errors?.passwordMismatch">-->
+<!--              Passwords do not match-->
+<!--            </small>-->
           </div>
 
           <button class="btn" type="submit" [disabled]="loading">
-            <span *ngIf="!loading">Sign In</span>
+            <span *ngIf="!loading">Create Account</span>
             <span *ngIf="loading" class="spinner"></span>
-            <span *ngIf="loading">Signing in...</span>
+            <span *ngIf="loading">Creating...</span>
           </button>
 
           <div class="msg error" *ngIf="errorMsg">{{ errorMsg }}</div>
 
           <div class="bottom">
-            <span>Don’t have an account?</span>
-            <a routerLink="/register" class="link">Register</a>
+            <span>Already have an account?</span>
+            <a routerLink="/signin" class="link">Sign in</a>
           </div>
         </form>
       </div>

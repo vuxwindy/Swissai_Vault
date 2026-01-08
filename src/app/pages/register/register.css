@@ -322,16 +322,4 @@
 .auth-bg::after {
   pointer-events: none;
 }
-/* FIX LAYER: background nằm dưới, content nằm trên */
-.auth-bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-}
-
-.auth-container {
-  position: relative;
-  z-index: 1;
-}
 

@@ -2,7 +2,8 @@ import { Routes } from '@angular/router';
 import { Landingpages } from './pages/landingpages/landingpages';
 import { AppHome } from './pages/app-home/app-home';
 import { Signin } from './pages/signin/signin';
- 
+import {Register} from './pages/register/register';
+
 
 // export const routes: Routes = [];
 export const routes: Routes = [
@@ -10,6 +11,7 @@ export const routes: Routes = [
   { path: '', component: Landingpages },
   // AUTH
   { path: 'signin', component: Signin },
+  { path: 'register', component: Register },
   // APP SHELL
   { path: 'app', component: AppHome,
     children: [
