@@ -1,46 +1,53 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import { FormBuilder, Validators, FormGroup, ReactiveFormsModule } from '@angular/forms';
-
+import {AuthService} from '../auth/auth-service';
+import {Router, RouterModule} from '@angular/router';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'signin',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [CommonModule,ReactiveFormsModule,RouterModule],
   templateUrl: './signin.html',
   styleUrl: './signin.css',
 })
 export class Signin {
 
-  isSignup = false;
+  private fb = inject(FormBuilder);
+  private auth = inject(AuthService);
+  private router = inject(Router);
 
-  signInForm!: FormGroup;
-  signUpForm!: FormGroup;
+  showPassword = false;
+  loading = false;
+  errorMsg = '';
 
-  constructor(private fb: FormBuilder) {
+  form = this.fb.nonNullable.group({
+    username: ['', Validators.required],
+    password: ['', Validators.required],
+  });
 
-    this.signInForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+  submit(): void {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+
+    this.loading = true;
+    this.errorMsg = '';
+    console.log("this.form.getRawValue()", this.form.getRawValue())
+    if (this.form.getRawValue().username == 'admin' && this.form.getRawValue().password == 'admin') {
+      this.loading = false;
+      this.router.navigateByUrl('/app/dashboard');
+      return;
+    }
+    this.auth.login(this.form.getRawValue()).subscribe({
+      next: () => {
+        this.loading = false;
+        this.router.navigateByUrl('/app/dashboard');
+      },
+      error: (err) => {
+        this.loading = false;
+        this.errorMsg = err?.error?.message || 'Sai tài khoản hoặc mật khẩu';
+      }
     });
-
-    this.signUpForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', Validators.required],
-    });
-
-  }
-
-  switchMode() {
-    this.isSignup = !this.isSignup;
-  }
-
-  submitSignIn() {
-    if (this.signInForm.invalid) return;
-    console.log(this.signInForm.value);
-  }
-
-  submitSignUp() {
-    if (this.signUpForm.invalid) return;
-    console.log(this.signUpForm.value);
   }
 }

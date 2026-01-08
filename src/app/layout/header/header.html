@@ -1,29 +1,18 @@
-<section
-  class="h-16 bg-[#0b1220] border-b border-slate-800
-         flex items-center px-4 lg:px-6 gap-3"
->
+<section class="h-16 bg-[#0b1220] border-b border-slate-800 flex items-center px-4 lg:px-6 gap-3">
 
   <!-- MOBILE: SIDEBAR TOGGLE -->
-  <button
-    class="lg:hidden text-slate-300 hover:text-white"
-    (click)="toggleSidebar()"
-  >
+  <button class="lg:hidden text-slate-300 hover:text-white" (click)="toggleSidebar()">
     ☰
   </button>
 
   <!-- LOGO -->
-  <div
-    class="w-9 h-9 rounded-full border border-cyan-400
-           flex items-center justify-center shrink-0"
-  >
+  <div class="w-9 h-9 rounded-full border border-cyan-400 flex items-center justify-center shrink-0">
     <span class="text-cyan-400 font-bold text-lg">C</span>
   </div>
 
   <!-- TITLE -->
   <div class="flex-1 px-2 lg:px-3 overflow-hidden">
-    <h1
-      class="text-white text-base lg:text-lg font-semibold truncate"
-    >
+    <h1 class="text-white text-base lg:text-lg font-semibold truncate">
       AI Multisig Custody
     </h1>
   </div>
@@ -35,32 +24,44 @@
     <button
       *ngIf="!walletConnected"
       (click)="connectWallet()"
-      class="px-4 py-2 rounded-lg bg-cyan-500 hover:bg-cyan-400
-             text-black font-semibold text-sm transition"
+      class="px-4 py-2 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-black font-semibold text-sm transition"
     >
       Connect Wallet
     </button>
 
-    <!-- WALLET CONNECTED -->
-    <div
+    <!-- WALLET CONNECTED (hover => Disconnect, click => disconnect) -->
+    <button
       *ngIf="walletConnected"
-      class="flex items-center gap-3 px-4 py-2 rounded-lg
-             bg-[#121826] border border-slate-700"
+      (click)="disconnectWallet()"
+      class="group flex items-center gap-3 px-4 py-2 rounded-lg
+             bg-[#121826] border border-slate-700
+             hover:border-red-400 hover:bg-[#161f33]
+             transition"
+      title="Disconnect"
+      type="button"
     >
       <span class="w-2 h-2 rounded-full bg-green-400"></span>
-      <span class="text-sm text-white font-medium truncate max-w-[120px]">
+
+      <!-- default: address -->
+      <span class="text-sm text-white font-medium truncate max-w-[140px] group-hover:hidden">
         {{ walletAddress }}
       </span>
-    </div>
+
+      <!-- hover: Disconnect -->
+      <span class="hidden group-hover:inline text-sm font-semibold text-red-300">
+        Disconnect
+      </span>
+    </button>
 
     <!-- LANGUAGE SWITCH -->
     <button
       (click)="toggleLanguage()"
       class="flex items-center gap-2 px-3 py-2 rounded-lg
              bg-[#121826] text-slate-300 hover:text-white
-             border border-slate-700 hover:border-cyan-400 transition text-sm"
+             border border-slate-700 hover:border-cyan-400
+             transition text-sm"
+      type="button"
     >
-    
       <span class="font-medium">{{ currentLang }}</span>
     </button>
 
@@ -72,6 +73,7 @@
     <button
       class="text-slate-300 hover:text-white"
       (click)="mobileMenuOpen = !mobileMenuOpen"
+      type="button"
     >
       ⋮
     </button>
@@ -84,28 +86,40 @@
              shadow-lg p-2 z-50"
     >
 
-      <!-- WALLET -->
+      <!-- CONNECT WALLET -->
       <button
         *ngIf="!walletConnected"
         (click)="connectWallet(); mobileMenuOpen = false"
         class="w-full px-3 py-2 rounded-lg text-left
-               hover:bg-[#1a2233] text-sm"
+               hover:bg-[#1a2233] text-sm text-slate-200"
+        type="button"
       >
         Connect Wallet
       </button>
 
-      <div
+      <!-- WALLET CONNECTED (hover => Disconnect, click => disconnect) -->
+      <button
         *ngIf="walletConnected"
-        class="px-3 py-2 text-xs text-slate-400"
+        (click)="disconnectWallet(); mobileMenuOpen = false"
+        class="w-full px-3 py-2 rounded-lg text-left hover:bg-[#1a2233]
+               text-sm group transition"
+        type="button"
+        title="Disconnect"
       >
-        {{ walletAddress }}
-      </div>
+        <span class="text-slate-300 group-hover:hidden">
+          {{ walletAddress }}
+        </span>
+        <span class="hidden group-hover:inline text-red-300 font-semibold">
+          Disconnect
+        </span>
+      </button>
 
       <!-- LANGUAGE -->
       <button
         (click)="toggleLanguage(); mobileMenuOpen = false"
         class="w-full px-3 py-2 rounded-lg text-left
-               hover:bg-[#1a2233] text-sm"
+               hover:bg-[#1a2233] text-sm text-slate-200"
+        type="button"
       >
         Language: {{ currentLang }}
       </button>
