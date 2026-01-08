@@ -9,7 +9,6 @@
 
         <h2>Sign in</h2>
 
-
         <div class="inputBox">
           <input type="email" formControlName="email" required />
           <span>Email</span>
@@ -23,11 +22,11 @@
         </div>
 
         <div class="links">
-          <a href="#">Forget Password</a>
+          <a href="forget">Forget Password</a>
           <a (click)="switchMode()">Signup</a>
         </div>
-        <a href="app.home">
-          <input type="submit" value="Login" [disabled]="signInForm.invalid" />
+        <a href="app">
+          <button type="submit" value="Login" [disabled]="signInForm.invalid">Login</button>
         </a>
       </form>
       }
@@ -64,7 +63,6 @@
         <button type="submit" [disabled]="signUpForm.invalid">
           Register
         </button>
-
 
       </form>
       }

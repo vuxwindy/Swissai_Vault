@@ -1,29 +1,67 @@
 <!-- Header -->
-<header class="header">
-  <div class="container">
-    <div class="logo">
-      <span>SwissAI Vault</span>
+<header class="sticky top-0 z-50 bg-black/70 backdrop-blur border-b border-white/10">
+  <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+
+    <!-- LOGO -->
+    <div class="text-white text-xl font-bold tracking-wide">
+      SwissAI <span class="text-orange-400">Vault</span>
     </div>
 
-    <nav class="nav">
-      <a href="">Home</a>
-      <a href="#ai-engine">AI Engine</a>
-      <a href="#features">Features</a>
-      <a href="#solutions">Solutions</a>
-      <a href="#">Docs</a>
+    <!-- DESKTOP NAV -->
+    <nav class="hidden md:flex items-center gap-8 text-sm text-slate-300">
+      <a class="hover:text-white transition" href="/">Home</a>
+      <a class="hover:text-white transition" href="#ai-engine">AI Engine</a>
+      <a class="hover:text-white transition" href="#features">Features</a>
+      <a class="hover:text-white transition" href="#solutions">Solutions</a>
+      <a class="hover:text-white transition" href="#">Docs</a>
     </nav>
 
-    <div class="action">
-      <!-- <a href="/signup">  -->
-      <a href="/signin">
-        <button class="px-7 py-3 rounded-xl bg-gradient-to-r from-orange-400 to-amber-500
+    <!-- CTA -->
+    <div class="hidden md:block">
+      <a routerLink="/signin">
+        <button
+          class="px-6 py-2 rounded-xl bg-gradient-to-r from-orange-400 to-amber-500
                  text-black font-semibold shadow-lg shadow-orange-500/30
-                 hover:scale-[1.03] transition">
+                 hover:scale-105 transition"
+        >
           Get Started
-        </button></a>
+        </button>
+      </a>
     </div>
+
+    <!-- MOBILE MENU BUTTON -->
+    <button
+      (click)="toggleMenu()"
+      class="md:hidden text-white text-2xl"
+    >
+      ☰
+    </button>
+  </div>
+
+  <!-- MOBILE NAV -->
+  <div
+    *ngIf="mobileOpen"
+    class="md:hidden bg-black/90 border-t border-white/10"
+  >
+    <nav class="flex flex-col px-6 py-4 gap-4 text-slate-300 text-sm">
+      <a (click)="closeMenu()" href="/" class="hover:text-white">Home</a>
+      <a (click)="closeMenu()" href="#ai-engine" class="hover:text-white">AI Engine</a>
+      <a (click)="closeMenu()" href="#features" class="hover:text-white">Features</a>
+      <a (click)="closeMenu()" href="#solutions" class="hover:text-white">Solutions</a>
+      <a (click)="closeMenu()" href="#" class="hover:text-white">Docs</a>
+
+      <a routerLink="/signin" (click)="closeMenu()">
+        <button
+          class="mt-3 w-full px-6 py-3 rounded-xl bg-gradient-to-r
+                 from-orange-400 to-amber-500 text-black font-semibold"
+        >
+          Get Started
+        </button>
+      </a>
+    </nav>
   </div>
 </header>
+
 
 <!-- Hero Section -->
 <section id="hero" class="relative overflow-hidden bg-gradient-to-br from-black via-gray-950 to-black">
@@ -43,6 +81,7 @@
       </p>
 
       <div class="mt-10 flex flex-wrap gap-4">
+        <a href="/signin"></a>
         <button class="px-7 py-3 rounded-xl bg-gradient-to-r from-orange-400 to-amber-500
                  text-black font-semibold shadow-lg shadow-orange-500/30
                  hover:scale-[1.03] transition">
@@ -166,3 +205,5 @@
 <exchanges></exchanges>
 <!-- pricing -->
 <pricing></pricing>
+<!-- footer -->
+<footer></footer>

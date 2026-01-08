@@ -1,5 +1,4 @@
-<div
-  class="bg-slate-900/60 border border-white/10 rounded-xl p-5
+<div class="bg-slate-900/60 border border-white/10 rounded-xl p-5
          hover:border-cyan-400/40 transition">
 
   <!-- HEADER -->
@@ -13,14 +12,11 @@
       </p>
     </div>
 
-    <span
-      class="px-2 py-1 rounded-md text-xs font-semibold"
-      [ngClass]="{
+    <span class="px-2 py-1 rounded-md text-xs font-semibold" [ngClass]="{
         'bg-green-500/10 text-green-400': status === 'Running',
         'bg-yellow-500/10 text-yellow-400': status === 'Paused',
         'bg-red-500/10 text-red-400': status === 'Stopped'
-      }"
-    >
+      }">
       {{ status }}
     </span>
   </div>
@@ -36,9 +32,7 @@
 
     <div  class="bg-cyan-500/20   border border-white/10 rounded-2xl p-6">
       <div class="text-slate-400 text-xs">Risk</div>
-      <div
-        class="font-semibold"
-        [ngClass]="{
+      <div class="font-semibold" [ngClass]="{
           'text-green-400': risk === 'Low',
           'text-yellow-400': risk === 'Medium',
           'text-red-400': risk === 'High'
@@ -48,7 +42,7 @@
       </div>
     </div>
 
-    <div  class="bg-cyan-500/20   border border-white/10 rounded-2xl p-6">
+    <div class="bg-cyan-500/20   border border-white/10 rounded-2xl p-6">
       <div class="text-slate-400 text-xs">AI Mode</div>
       <div class="text-cyan-400 font-semibold">
         Auto
@@ -58,17 +52,17 @@
 
   <!-- ACTIONS -->
   <div class="flex justify-end gap-3">
-    <button
-      class="px-3 py-2 text-xs rounded-lg
+    <button class="px-3 py-2 text-xs rounded-lg
              bg-slate-800 hover:bg-slate-700">
       View
     </button>
 
-    <button
-      class="px-3 py-2 text-xs rounded-lg
+    <button class="px-3 py-2 text-xs rounded-lg
              bg-cyan-500/10 text-cyan-400 hover:bg-cyan-500/20">
       Manage
     </button>
   </div>
+
+  <div #container class="tradingview-widget-container"></div>
 </div>
 
