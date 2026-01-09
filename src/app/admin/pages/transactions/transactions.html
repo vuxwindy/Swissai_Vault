@@ -1,0 +1,96 @@
+<div class="space-y-4">
+
+  <!-- Header -->
+  <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+    <h1 class="text-xl font-semibold text-white">Transactions</h1>
+
+    <!-- Filters (future) -->
+    <div class="flex gap-2">
+      <select class="px-3 py-2 rounded-lg bg-slate-800 border border-white/10 text-sm">
+        <option>All Types</option>
+        <option>Deposit</option>
+        <option>Withdraw</option>
+      </select>
+
+      <select class="px-3 py-2 rounded-lg bg-slate-800 border border-white/10 text-sm">
+        <option>All Status</option>
+        <option>Pending</option>
+        <option>Completed</option>
+        <option>Failed</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="overflow-x-auto rounded-xl border border-white/10">
+    <table class="w-full text-sm">
+      <thead class="bg-slate-800 text-slate-400">
+        <tr>
+          <th class="px-4 py-3 text-left">Tx ID</th>
+          <th>User</th>
+          <th>Type</th>
+          <th>Asset</th>
+          <th>Amount</th>
+          <th>Network</th>
+          <th>Status</th>
+          <th class="text-right px-4">Time</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr
+          *ngFor="let tx of transactions"
+          class="border-t border-white/5 hover:bg-slate-800/40 transition">
+
+          <td class="px-4 py-3 font-mono text-xs text-slate-400">
+            #{{ tx.id }}
+          </td>
+
+          <td>{{ tx.user }}</td>
+
+          <td>
+            <span
+              class="px-2 py-1 rounded-full text-xs font-semibold"
+              [ngClass]="{
+                'bg-green-500 text-black': tx.type === 'deposit',
+                'bg-red-500 text-black': tx.type === 'withdraw'
+              }">
+              {{ tx.type | uppercase }}
+            </span>
+          </td>
+
+          <td>{{ tx.asset }}</td>
+
+          <td class="font-semibold">
+            {{ tx.amount | number }}
+          </td>
+
+          <td>
+            <span class="px-2 py-1 rounded bg-slate-700 text-xs">
+              {{ tx.network }}
+            </span>
+          </td>
+
+          <td>
+            <span
+              class="px-2 py-1 rounded-full text-xs font-semibold"
+              [ngClass]="{
+                'bg-yellow-500 text-black': tx.status === 'pending',
+                'bg-green-500 text-black': tx.status === 'completed',
+                'bg-red-500 text-black': tx.status === 'failed'
+              }">
+              {{ tx.status | uppercase }}
+            </span>
+          </td>
+
+          <td class="text-right px-4 text-slate-400">
+            {{ tx.createdAt }}
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+

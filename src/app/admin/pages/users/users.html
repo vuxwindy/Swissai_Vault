@@ -1,0 +1,73 @@
+<div class="space-y-4">
+
+  <!-- Header -->
+  <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+    <h1 class="text-xl font-semibold text-white">Users</h1>
+
+    <button
+      routerLink="create"
+      class="px-4 py-2 rounded-lg bg-cyan-500 text-black font-semibold hover:bg-cyan-400 transition">
+      + Add User
+    </button>
+  </div>
+
+  <!-- Table -->
+  <div class="overflow-x-auto rounded-xl border border-white/10">
+    <table class="w-full text-sm">
+      <thead class="bg-slate-800 text-slate-400">
+        <tr>
+          <th class="px-4 py-3 text-left">Name</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Status</th>
+          <th class="text-right px-4">Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr
+          *ngFor="let user of users"
+          class="border-t border-white/5 hover:bg-slate-800/40 transition">
+
+          <td class="px-4 py-3 font-medium text-white">
+            {{ user.name }}
+          </td>
+
+          <td>{{ user.email }}</td>
+
+          <td>
+            <span class="px-2 py-1 rounded-full bg-slate-700 text-xs">
+              {{ user.role }}
+            </span>
+          </td>
+
+          <td>
+            <span
+              class="px-2 py-1 rounded-full text-xs"
+              [class.bg-green-500]="user.status === 'active'"
+              [class.bg-red-500]="user.status === 'blocked'">
+              {{ user.status }}
+            </span>
+          </td>
+
+          <td class="text-right px-4 space-x-3">
+            <a
+              [routerLink]="user.id + '/edit'"
+              class="text-cyan-400 hover:underline">
+              Edit
+            </a>
+
+            <button
+              (click)="deleteUser(user)"
+              class="text-red-400 hover:underline">
+              Delete
+            </button>
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+

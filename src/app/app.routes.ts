@@ -3,6 +3,7 @@ import { Landingpages } from './pages/landingpages/landingpages';
 import { AppHome } from './pages/app-home/app-home';
 import { Signin } from './pages/signin/signin';
 import {Register} from './pages/register/register';
+import { AdminShell } from './admin/admin-shell/admin-shell';
 
 
 // export const routes: Routes = [];
@@ -12,6 +13,15 @@ export const routes: Routes = [
   // AUTH
   { path: 'signin', component: Signin },
   { path: 'register', component: Register },
+  // ADMIN SHELL
+  { path: 'admin', component: AdminShell,
+    children: [
+      { path: '', redirectTo: 'users', pathMatch: 'full' },
+      { path: 'users', loadComponent: () => import('./admin/pages/users/users').then((m) => m.Users) },
+      { path: 'kyc', loadComponent: () => import('./admin/pages/kyc/kyc').then((m) => m.Kyc) },
+      { path: 'transactions', loadComponent: () => import('./admin/pages/transactions/transactions').then((m) => m.Transactions) },
+    ],
+  },
   // APP SHELL
   { path: 'app', component: AppHome,
     children: [

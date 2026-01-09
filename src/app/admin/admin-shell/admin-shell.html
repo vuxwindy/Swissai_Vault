@@ -1,12 +1,26 @@
 <div class="min-h-screen flex bg-slate-950 text-slate-200">
 
+  <!-- Mobile overlay -->
+  <div
+    *ngIf="layout.mobileOpen"
+    (click)="layout.closeMobile()"
+    class="fixed inset-0 bg-black/50 z-30 lg:hidden">
+  </div>
+
   <!-- Sidebar -->
-  <aside class="hidden lg:block w-64 bg-slate-900 border-r border-white/10">
+  <aside
+    class="fixed lg:static z-40 h-full bg-slate-900 border-r border-white/10
+           transition-all duration-300"
+    [class.w-64]="!layout.collapsed"
+    [class.w-20]="layout.collapsed"
+  [class.-translate-x-full]="!layout.mobileOpen && !isDesktop"
+[class.translate-x-0]="layout.mobileOpen || isDesktop"
+> 
     <admin-sidebar></admin-sidebar>
   </aside>
 
   <!-- Main -->
-  <div class="flex-1 flex flex-col">
+  <div class="flex-1 flex flex-col lg:ml-0">
     <admin-header></admin-header>
 
     <main class="flex-1 p-4 lg:p-6">
@@ -15,3 +29,4 @@
   </div>
 
 </div>
+

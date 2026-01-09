@@ -1,0 +1,28 @@
+ 
+<header class="h-16 bg-slate-900 border-b border-white/10 flex items-center px-4">
+
+  <!-- Mobile menu -->
+  <button
+    class="lg:hidden text-slate-300"
+    (click)="layout.toggleMobile()">
+    ☰
+  </button>
+
+  <!-- Collapse desktop -->
+  <button
+    class="hidden lg:block ml-2 text-slate-300"
+    (click)="layout.toggleSidebar()">
+    ⇔
+  </button>
+
+  <h1 class="ml-4 font-semibold text-white">
+    Admin Panel
+  </h1>
+
+  <div class="ml-auto flex items-center gap-4">
+    <span class="text-sm text-slate-400">Admin</span>
+    <div class="w-8 h-8 rounded-full bg-cyan-500 text-black flex items-center justify-center font-bold">
+      A
+    </div>
+  </div>
+</header>

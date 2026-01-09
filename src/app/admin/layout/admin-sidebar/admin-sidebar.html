@@ -1,0 +1,30 @@
+ 
+<div class="h-full flex flex-col">
+
+  <!-- Logo -->
+  <div class="h-16 flex items-center justify-center border-b border-white/10">
+    <span *ngIf="!layout.collapsed" class="font-bold text-white">
+      SwissAI Admin
+    </span>
+    <span *ngIf="layout.collapsed">🧠</span>
+  </div>
+
+  <!-- Menu -->
+  <nav class="flex-1 px-2 py-4 space-y-1">
+    <a
+      *ngFor="let m of menu"
+      [routerLink]="m.route"
+      routerLinkActive="bg-slate-800 text-white"
+      (click)="layout.closeMobile()"
+      class="flex items-center gap-3 px-3 py-2 rounded-lg
+             text-slate-400 hover:text-white hover:bg-slate-800 transition">
+
+      <span class="text-lg">{{ m.icon }}</span>
+
+      <span *ngIf="!layout.collapsed">
+        {{ m.label }}
+      </span>
+    </a>
+  </nav>
+
+</div>
