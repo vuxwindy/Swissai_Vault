@@ -18,11 +18,11 @@ export class Sidebar {
     { label: 'Dashboard', icon: '📊', route: '/app/dashboard' },
     { label: 'Deposit/Withdraw', icon: '💎', route: '/app/proposals' },
     { label: 'Credit/Loan', icon: '💳', route: '/app/loan' },
-    { label: 'Trust Pulse', icon: '', route: '/app/trustpulse' },
+    { label: 'Trust Pulse', icon: '🛂', route: '/app/trustpulse' },
     { label: 'AI Strategy Monitor', icon: '💬', route: '/app/reports' },
     { label: 'KYC', icon: '👛', route: '/app/vaults' },
     { label: 'Settings', icon: '⚙️', route: '/app/settings' },
-    { label: 'Log Out', icon: '💬', route: '/app/help' }
+    { label: 'Log Out', icon: '❌', route: '/app/help' }
   ];
 
    toggleCollapse() {

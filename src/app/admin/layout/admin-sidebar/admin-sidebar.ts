@@ -12,9 +12,13 @@ import { RouterModule } from '@angular/router';
 })
 export class AdminSidebar {
  menu = [
+    { label: 'Dashboard', icon: '📊', route: '/admin/dashboard' },
     { label: 'Users', icon: '👤', route: '/admin/users' },
     { label: 'KYC', icon: '🛂', route: '/admin/kyc' },
-    { label: 'Transactions', icon: '💳', route: '/admin/transactions' },
+    { label: 'Transactions', icon: '💎', route: '/admin/transactions' },
+    { label: 'Credit', icon: '💳', route: '/admin/credit' },
+    { label: 'Settings', icon: '⚙️', route: '/admin/settings' },
+
   ];
   constructor(public layout: LayoutService) {}
 }

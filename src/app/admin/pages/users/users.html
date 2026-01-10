@@ -3,14 +3,14 @@
   <!-- Header -->
   <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
     <h1 class="text-xl font-semibold text-white">Users</h1>
-
+<a href="admin/user-create">
     <button
-      routerLink="create"
+      routerLink="create"  
        class="w-full lg:w-auto px-4 py-2 rounded-lg
            bg-cyan-500 text-black font-semibold
            hover:bg-cyan-400 transition">
     + Add User
-    </button>
+    </button></a>
   </div>
 
   <!-- Table -->
@@ -59,6 +59,10 @@
           </td>
 
           <td class="text-right px-4 space-x-3">
+            <a href="admin/user-detail"
+        >
+        View
+      </a>
             <a
               [routerLink]="user.id + '/edit'"
               class="text-cyan-400 hover:underline">
@@ -108,7 +112,14 @@
     </div>
 
     <!-- Actions -->
-    <div class="flex gap-3 pt-2">
+    <div class="flex gap-3 pt-3"> 
+        <a href="admin/user-detail"
+        [routerLink]="user.id + '/view'"
+        class="flex-1 text-center py-2 rounded-lg
+               bg-slate-800 hover:bg-slate-700
+               text-cyan-400 text-sm font-semibold">
+        View
+      </a>
       <a
         [routerLink]="user.id + '/edit'"
         class="flex-1 text-center py-2 rounded-lg
