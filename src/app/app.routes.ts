@@ -16,7 +16,8 @@ export const routes: Routes = [
   // ADMIN SHELL
   { path: 'admin', component: AdminShell,
     children: [
-      { path: '', redirectTo: 'users', pathMatch: 'full' },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: 'dashboard', loadComponent: () => import('./admin/pages/dashboard/dashboard').then((m) => m.AdminDashboard) },
       { path: 'users', loadComponent: () => import('./admin/pages/users/users').then((m) => m.Users) },
       { path: 'kyc', loadComponent: () => import('./admin/pages/kyc/kyc').then((m) => m.Kyc) },
       { path: 'transactions', loadComponent: () => import('./admin/pages/transactions/transactions').then((m) => m.Transactions) },

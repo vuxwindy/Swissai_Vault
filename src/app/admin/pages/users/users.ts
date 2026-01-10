@@ -40,6 +40,16 @@ export class Users {
       status: 'blocked',
       createdAt: '2025-01-12',
     },
+     {
+      id: 3,
+      name: 'Nguyen Van A',
+      email: 'a@swissai.io',
+      role: 'Admin',
+      level: 'lv1',
+      status: 'active',
+      createdAt: '2025-01-10',
+    },
+    
   ];
 
   deleteUser(user: User) {
