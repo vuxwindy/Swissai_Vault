@@ -1,15 +1,17 @@
- 
-import { Component } from '@angular/core';
+ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+ 
 
 type KycStatus = 'pending' | 'approved' | 'rejected';
+
 
 interface KycRecord {
   id: number;
   user: string;
   email: string;
   documentType: string;
+  documentImage: string;
   submittedAt: string;
   status: KycStatus;
 }
@@ -28,6 +30,7 @@ export class Kyc {
       user: 'Nguyen Van A',
       email: 'a@swissai.io',
       documentType: 'Passport',
+      documentImage: 'hero1.png',
       submittedAt: '2025-01-15',
       status: 'pending',
     },
@@ -36,6 +39,7 @@ export class Kyc {
       user: 'John Doe',
       email: 'john@swissai.io',
       documentType: 'Passport',
+      documentImage: 'hero1.png',
       submittedAt: '2025-01-14',
       status: 'approved',
     },
@@ -48,5 +52,15 @@ export class Kyc {
   reject(kyc: KycRecord) {
     kyc.status = 'rejected';
   }
+ 
+previewImage: string | null = null;
+openPreview(img: string) {
+  this.previewImage = img;
+}
+
+closePreview() {
+  this.previewImage = null;
+}
+
 }
 

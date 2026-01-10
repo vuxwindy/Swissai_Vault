@@ -6,19 +6,22 @@
 
     <button
       routerLink="create"
-      class="px-4 py-2 rounded-lg bg-cyan-500 text-black font-semibold hover:bg-cyan-400 transition">
-      + Add User
+       class="w-full lg:w-auto px-4 py-2 rounded-lg
+           bg-cyan-500 text-black font-semibold
+           hover:bg-cyan-400 transition">
+    + Add User
     </button>
   </div>
 
   <!-- Table -->
-  <div class="overflow-x-auto rounded-xl border border-white/10">
+  <div class="hidden lg:block overflow-x-auto rounded-xl border border-white/10">
     <table class="w-full text-sm">
       <thead class="bg-slate-800 text-slate-400">
         <tr>
           <th class="px-4 py-3 text-left">Name</th>
           <th>Email</th>
           <th>Role</th>
+          <th>Level</th>
           <th>Status</th>
           <th class="text-right px-4">Actions</th>
         </tr>
@@ -38,6 +41,11 @@
           <td>
             <span class="px-2 py-1 rounded-full bg-slate-700 text-xs">
               {{ user.role }}
+            </span>
+          </td>
+          <td>
+            <span class="px-2 py-1 rounded-full bg-slate-700 text-xs"> 
+              {{ user.level }}
             </span>
           </td>
 
@@ -68,6 +76,57 @@
       </tbody>
     </table>
   </div>
+<!-- MOBILE CARDS -->
+<div class="lg:hidden space-y-4">
+  <div
+    *ngFor="let user of users"
+    class="bg-slate-900 border border-white/10 rounded-xl p-4 space-y-3">
+
+    <!-- Header -->
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-white font-semibold">{{ user.name }}</p>
+        <p class="text-xs text-slate-400">{{ user.email }}</p>
+      </div>
+<div class="px-2 py-1 rounded-full bg-slate-700 text-xs">{{user.level}}</div>
+      <span
+        class="px-2 py-1 rounded-full text-xs font-semibold"
+        [ngClass]="{
+          'bg-green-500 text-black': user.status === 'active',
+          'bg-red-500 text-black': user.status === 'blocked'
+        }">
+        {{ user.status | uppercase }}
+      </span>
+    </div>
+
+    <!-- Role -->
+    <div class="flex justify-between text-sm">
+      <span class="text-slate-400">Role</span>
+      <span class="px-2 py-1 rounded-lg bg-slate-700 text-xs">
+        {{ user.role }}
+      </span>
+    </div>
+
+    <!-- Actions -->
+    <div class="flex gap-3 pt-2">
+      <a
+        [routerLink]="user.id + '/edit'"
+        class="flex-1 text-center py-2 rounded-lg
+               bg-slate-800 hover:bg-slate-700
+               text-cyan-400 text-sm font-semibold">
+        Edit
+      </a>
+
+      <button
+        (click)="deleteUser(user)"
+        class="flex-1 py-2 rounded-lg
+               bg-red-500/10 hover:bg-red-500/20
+               text-red-400 text-sm font-semibold">
+        Delete
+      </button>
+    </div>
+  </div>
+</div>
 
 </div>
 

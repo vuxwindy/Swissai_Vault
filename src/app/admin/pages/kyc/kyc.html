@@ -6,7 +6,7 @@
   </div>
 
   <!-- Table -->
-  <div class="overflow-x-auto rounded-xl border border-white/10">
+  <div class="hidden lg:block overflow-x-auto rounded-xl border border-white/10">
     <table class="w-full text-sm">
       <thead class="bg-slate-800 text-slate-400">
         <tr>
@@ -15,6 +15,7 @@
           <th>Document</th>
           <th>Submitted</th>
           <th>Status</th>
+          <th>Image</th>
           <th class="text-right px-4">Actions</th>
         </tr>
       </thead>
@@ -51,15 +52,17 @@
               {{ kyc.status | uppercase }}
             </span>
           </td>
+         <td>
+          <img
+            [src]="kyc.documentImage"
+            (click)="openPreview(kyc.documentImage)"
+            class="w-14 h-10 object-cover rounded-md border border-white/10
+                  cursor-pointer hover:scale-105 transition"
+            alt="kyc-doc"
+          />
+        </td>
 
           <td class="text-right px-4 space-x-2">
-
-            <a
-              [routerLink]="kyc.id.toString()"
-              class="text-cyan-400 hover:underline">
-              View
-            </a>
-
             <button
               *ngIf="kyc.status === 'pending'"
               (click)="approve(kyc)"
@@ -79,6 +82,92 @@
       </tbody>
     </table>
   </div>
+<!-- MOBILE VIEW -->
+<div class="lg:hidden space-y-4">
+  <div
+    *ngFor="let kyc of kycs"
+    class="bg-slate-900 border border-white/10 rounded-xl p-4 space-y-3">
+
+    <!-- Header -->
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-white font-semibold">{{ kyc.user }}</p>
+        <p class="text-xs text-slate-400">{{ kyc.email }}</p>
+      </div>
+
+      <span
+        class="px-2 py-1 rounded-full text-xs font-semibold"
+        [ngClass]="{
+          'bg-yellow-500 text-black': kyc.status === 'pending',
+          'bg-green-500 text-black': kyc.status === 'approved',
+          'bg-red-500 text-black': kyc.status === 'rejected'
+        }">
+        {{ kyc.status | uppercase }}
+      </span>
+    </div>
+
+    <!-- Document -->
+    <div class="flex items-center justify-between text-sm">
+      <span class="text-slate-400">Document</span>
+      <span class="px-2 py-1 bg-slate-700 rounded-lg text-xs">
+        {{ kyc.documentType }}
+      </span>
+    </div>
+
+    <!-- Submitted -->
+    <div class="flex items-center justify-between text-sm">
+      <span class="text-slate-400">Submitted</span>
+      <span>{{ kyc.submittedAt }}</span>
+    </div>
+
+    <!-- Image -->
+    <div>
+      <img
+        [src]="kyc.documentImage"
+        (click)="openPreview(kyc.documentImage)"
+        class="w-full h-40 object-cover rounded-lg border border-white/10
+               cursor-pointer hover:ring-2 hover:ring-cyan-400 transition"
+      />
+    </div>
+
+    <!-- Actions -->
+    <div class="flex gap-2 pt-2">
+      <button
+        *ngIf="kyc.status === 'pending'"
+        (click)="approve(kyc)"
+        class="flex-1 py-2 rounded-lg bg-green-500 text-black text-sm font-semibold">
+        Approve
+      </button>
+
+      <button
+        *ngIf="kyc.status === 'pending'"
+        (click)="reject(kyc)"
+        class="flex-1 py-2 rounded-lg bg-red-500 text-black text-sm font-semibold">
+        Reject
+      </button>
+    </div>
+
+  </div>
+</div>
 
 </div>
+<!-- Image Preview Modal -->
+<div
+  *ngIf="previewImage"
+  class="fixed inset-0 z-50 bg-black/70 flex items-center justify-center">
+
+  <div class="relative bg-slate-900 rounded-xl p-4 max-w-lg w-full">
+    <button
+      (click)="closePreview()"
+      class="absolute top-2 right-2 text-white/60 hover:text-white">
+      ✕
+    </button>
+
+    <img
+      [src]="previewImage"
+      class="w-full max-h-[70vh] object-contain rounded-lg border border-white/10"
+    />
+  </div>
+</div>
+
 

@@ -8,6 +8,7 @@ interface User {
   name: string;
   email: string;
   role: string;
+  level: string;
   status: 'active' | 'blocked';
   createdAt: string;
 }
@@ -26,6 +27,7 @@ export class Users {
       name: 'Nguyen Van A',
       email: 'a@swissai.io',
       role: 'Admin',
+      level: 'lv1',
       status: 'active',
       createdAt: '2025-01-10',
     },
@@ -34,6 +36,7 @@ export class Users {
       name: 'John Doe',
       email: 'john@swissai.io',
       role: 'User',
+      level: "lv2",
       status: 'blocked',
       createdAt: '2025-01-12',
     },
