@@ -1,18 +1,19 @@
 <div class="space-y-4">
 
-  <!-- Header -->
+  <!-- ================= HEADER + FILTER ================= -->
   <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
     <h1 class="text-xl font-semibold text-white">Transactions</h1>
 
-    <!-- Filters (future) -->
-    <div class="flex gap-2">
-      <select class="px-3 py-2 rounded-lg bg-slate-800 border border-white/10 text-sm">
+    <div class="flex flex-col sm:flex-row gap-2 w-full lg:w-auto">
+      <select
+        class="w-full sm:w-auto px-3 py-2 rounded-lg bg-slate-800 border border-white/10 text-sm">
         <option>All Types</option>
         <option>Deposit</option>
         <option>Withdraw</option>
       </select>
 
-      <select class="px-3 py-2 rounded-lg bg-slate-800 border border-white/10 text-sm">
+      <select
+        class="w-full sm:w-auto px-3 py-2 rounded-lg bg-slate-800 border border-white/10 text-sm">
         <option>All Status</option>
         <option>Pending</option>
         <option>Completed</option>
@@ -21,17 +22,18 @@
     </div>
   </div>
 
-  <!-- Table -->
-  <div class="overflow-x-auto rounded-xl border border-white/10">
+  <!-- ================= DESKTOP TABLE ================= -->
+  <div class="hidden lg:block overflow-x-auto rounded-xl border border-white/10">
     <table class="w-full text-sm">
       <thead class="bg-slate-800 text-slate-400">
         <tr>
           <th class="px-4 py-3 text-left">Tx ID</th>
-          <th>User</th>
+          <th>Email</th>
           <th>Type</th>
-          <th>Asset</th>
           <th>Amount</th>
+          <th>Asset</th>
           <th>Network</th>
+          <th>Address</th>
           <th>Status</th>
           <th class="text-right px-4">Time</th>
         </tr>
@@ -46,7 +48,7 @@
             #{{ tx.id }}
           </td>
 
-          <td>{{ tx.user }}</td>
+          <td>{{ tx.mail }}</td>
 
           <td>
             <span
@@ -59,11 +61,8 @@
             </span>
           </td>
 
+          <td class="font-semibold">{{ tx.amount | number }}</td>
           <td>{{ tx.asset }}</td>
-
-          <td class="font-semibold">
-            {{ tx.amount | number }}
-          </td>
 
           <td>
             <span class="px-2 py-1 rounded bg-slate-700 text-xs">
@@ -71,16 +70,34 @@
             </span>
           </td>
 
+          <td class="font-mono text-xs truncate max-w-[160px]">
+            {{ tx.address }}
+          </td>
+
           <td>
-            <span
-              class="px-2 py-1 rounded-full text-xs font-semibold"
-              [ngClass]="{
-                'bg-yellow-500 text-black': tx.status === 'pending',
-                'bg-green-500 text-black': tx.status === 'completed',
-                'bg-red-500 text-black': tx.status === 'failed'
-              }">
-              {{ tx.status | uppercase }}
-            </span>
+          <div> <ng-container *ngIf="tx.status === 'pending'; else readonlyStatus">
+    <select
+      class="px-2 py-1 rounded-full text-xs font-semibold
+             bg-yellow-500 text-black cursor-pointer"
+      (change)="updateStatus(tx, $event)">
+      <option value="pending" selected>PENDING</option>
+      <option value="completed">APPROVE</option>
+      <option value="failed">REJECT</option>
+    </select>
+  </ng-container>
+
+  <!-- Readonly -->
+  <ng-template #readonlyStatus>
+    <span
+      class="px-2 py-1 rounded-full text-xs font-semibold"
+      [ngClass]="{
+        'bg-green-500 text-black': tx.status === 'completed',
+        'bg-red-500 text-black': tx.status === 'failed'
+      }">
+      {{ tx.status | uppercase }}
+    </span>
+  </ng-template>
+</div>
           </td>
 
           <td class="text-right px-4 text-slate-400">
@@ -90,6 +107,84 @@
         </tr>
       </tbody>
     </table>
+  </div>
+
+  <!-- ================= MOBILE / TABLET CARD VIEW ================= -->
+  <div class="space-y-3 lg:hidden">
+    <div
+      *ngFor="let tx of transactions"
+      class="rounded-xl border border-white/10 bg-slate-900 p-4 space-y-3">
+
+      <div class="flex justify-between items-center">
+        <span class="font-mono text-xs text-slate-400">
+          #{{ tx.id }}
+        </span>
+
+        <span
+          class="px-2 py-1 rounded-full text-xs font-semibold"
+          [ngClass]="{
+            'bg-green-500 text-black': tx.type === 'deposit',
+            'bg-red-500 text-black': tx.type === 'withdraw'
+          }">
+          {{ tx.type | uppercase }}
+        </span>
+      </div>
+
+      <div>
+        <div class="text-white font-medium">{{ tx.mail }}</div>
+        <div class="text-slate-400 text-xs">{{ tx.createdAt }}</div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3 text-sm">
+        <div>
+          <div class="text-slate-400 text-xs">Amount</div>
+          <div class="font-semibold">
+            {{ tx.amount | number }} {{ tx.asset }}
+          </div>
+        </div>
+
+        <div>
+          <div class="text-slate-400 text-xs">Network</div>
+          <span class="px-2 py-1 rounded bg-slate-700 text-xs">
+            {{ tx.network }}
+          </span>
+        </div>
+      </div>
+
+      <div>
+        <div class="text-slate-400 text-xs mb-1">Address</div>
+        <div class="font-mono text-xs break-all">
+          {{ tx.address }}
+        </div>
+      </div>
+
+      <div class="flex justify-end">
+  <!-- Editable when pending -->
+  <ng-container *ngIf="tx.status === 'pending'; else readonlyStatus">
+    <select
+      class="px-2 py-1 rounded-full text-xs font-semibold
+             bg-yellow-500 text-black cursor-pointer"
+      (change)="updateStatus(tx, $event)">
+      <option value="pending" selected>PENDING</option>
+      <option value="completed">APPROVE</option>
+      <option value="failed">REJECT</option>
+    </select>
+  </ng-container>
+
+  <!-- Readonly -->
+  <ng-template #readonlyStatus>
+    <span
+      class="px-2 py-1 rounded-full text-xs font-semibold"
+      [ngClass]="{
+        'bg-green-500 text-black': tx.status === 'completed',
+        'bg-red-500 text-black': tx.status === 'failed'
+      }">
+      {{ tx.status | uppercase }}
+    </span>
+  </ng-template>
+</div>
+
+    </div>
   </div>
 
 </div>

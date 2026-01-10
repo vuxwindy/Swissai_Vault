@@ -35,7 +35,7 @@ export class Kyc {
       id: 2,
       user: 'John Doe',
       email: 'john@swissai.io',
-      documentType: 'ID Card',
+      documentType: 'Passport',
       submittedAt: '2025-01-14',
       status: 'approved',
     },
