@@ -1,0 +1,152 @@
+ <div class="space-y-4">
+
+  <!-- ================= HEADER + FILTER ================= -->
+  <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+    <h1 class="text-xl font-semibold text-white">
+      Trust Pulse
+    </h1>
+
+    <div class="flex flex-col sm:flex-row gap-2 w-full lg:w-auto">
+      <select
+        class="w-full sm:w-auto px-3 py-2 rounded-lg bg-slate-800 border border-white/10 text-sm">
+        <option>All Status</option>
+        <option>Running</option>
+        <option>Completed</option>
+        <option>Stopped</option>
+      </select>
+    </div>
+  </div>
+  <!-- ================= DESKTOP TABLE ================= -->
+  <div class="hidden lg:block overflow-x-auto rounded-xl border border-white/10">
+    <table class="w-full text-sm">
+      <thead class="bg-slate-800 text-slate-400">
+        <tr>
+          <th class="px-4 py-3 text-left">ID</th>
+          <th>Trading Pair</th>
+          <th>Value</th>
+          <th>Expected Profit</th>
+          <th>Term</th>
+          <th>Status</th>
+          <th class="text-right px-4">Created</th>
+          <th class="text-right px-4">Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr
+          *ngFor="let p of pulses"
+          class="border-t border-white/5 hover:bg-slate-800/40 transition">
+
+          <td class="px-4 py-3 font-mono text-xs text-slate-400">
+            #{{ p.id }}
+          </td>
+
+          <td class="font-medium">
+            {{ p.pair }} on {{ p.exchange }}
+          </td>
+
+          <td class="font-semibold">
+            {{ p.value | number }} USDT
+          </td>
+
+          <td class="text-green-400 font-semibold">
+            {{ p.expectedProfit | number:'1.2-2' }} USDT
+          </td>
+
+          <td>{{ p.term }} days</td>
+
+          <td>
+            <span
+              class="px-2 py-1 rounded-full text-xs font-semibold"
+              [ngClass]="{
+                'bg-green-500 text-black': p.status === 'running',
+                'bg-slate-500 text-black': p.status === 'completed',
+                'bg-red-500 text-black': p.status === 'stopped'
+              }">
+              {{ p.status | uppercase }}
+            </span>
+          </td>
+
+          <td class="text-right px-4 text-slate-400">
+            {{ p.createdAt }}
+          </td>
+
+          <td class="text-right px-4">
+            <button
+              *ngIf="p.status === 'running'"
+              (click)="stop(p)"
+              class="px-3 py-1 rounded-lg bg-red-500 text-black text-xs">
+              Stop
+            </button>
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- ================= MOBILE / TABLET CARD VIEW ================= -->
+  <div class="space-y-3 lg:hidden">
+    <div
+      *ngFor="let p of pulses"
+      class="rounded-xl border border-white/10 bg-slate-900 p-4 space-y-3">
+
+      <div class="flex justify-between items-center">
+        <span class="font-mono text-xs text-slate-400">
+          #{{ p.id }}
+        </span>
+
+        <span
+          class="px-2 py-1 rounded-full text-xs font-semibold"
+          [ngClass]="{
+            'bg-green-500 text-black': p.status === 'running',
+            'bg-slate-500 text-black': p.status === 'completed',
+            'bg-red-500 text-black': p.status === 'stopped'
+          }">
+          {{ p.status | uppercase }}
+        </span>
+      </div>
+
+      <div>
+        <div class="text-white font-medium">
+          {{ p.pair }} on {{ p.exchange }}
+        </div>
+        <div class="text-slate-400 text-xs">
+          {{ p.createdAt }} UTC
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3 text-sm">
+        <div>
+          <p class="text-slate-400 text-xs">Value</p>
+          <p class="font-semibold">
+            {{ p.value | number }} USDT
+          </p>
+        </div>
+
+        <div>
+          <p class="text-slate-400 text-xs">Expected Profit</p>
+          <p class="text-green-400 font-semibold">
+            {{ p.expectedProfit | number:'1.2-2' }} USDT
+          </p>
+        </div>
+      </div>
+
+      <div class="flex justify-between items-center text-sm">
+        <div>
+          <div class="text-slate-400 text-xs">Term</div>
+          <div>{{ p.term }} days</div>
+        </div>
+
+        <button
+          *ngIf="p.status === 'running'"
+          (click)="stop(p)"
+          class="px-3 py-1 rounded-lg bg-red-500 text-black text-xs">
+          Stop
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+

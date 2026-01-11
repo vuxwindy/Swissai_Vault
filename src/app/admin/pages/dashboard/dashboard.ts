@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { DepositChart } from '../../layout/deposit-chart/deposit-chart';
 
 @Component({
   selector: 'admin-dashboard',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, DepositChart],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })

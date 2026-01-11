@@ -17,8 +17,9 @@ export class AdminSidebar {
     { label: 'KYC', icon: '🛂', route: '/admin/kyc' },
     { label: 'Transactions', icon: '💎', route: '/admin/transactions' },
     { label: 'Credit', icon: '💳', route: '/admin/credit' },
+    { label: 'Trust Pulse', icon: '📄', route: '/admin/trust-pulse' },
     { label: 'Settings', icon: '⚙️', route: '/admin/settings' },
-
+ 
   ];
   constructor(public layout: LayoutService) {}
 }
